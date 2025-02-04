@@ -1,0 +1,18 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CompoundEmployee">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Person" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:short" name="Manager_ID"/>
+              <xs:element type="xs:string" name="Manager_Name"/>
+              <xs:element type="xs:short" name="Employee_ID"/>
+              <xs:element type="xs:string" name="Employee_Name"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

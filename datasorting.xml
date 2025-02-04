@@ -1,0 +1,19 @@
+<Employee>
+   <employment_information>
+      <job_information>
+         <start_date>2010-01-01</start_date>
+         <end_date>2010-12-31</end_date>
+         <position>Position A</position>
+      </job_information>
+      <job_information>
+         <start_date>2019-01-01</start_date>
+         <end_date>9999-12-31</end_date>
+         <position>Position C</position>
+      </job_information>
+      <job_information>
+         <start_date>2011-01-01</start_date>
+         <end_date>2018-12-31</end_date>
+         <position>Position B</position>
+      </job_information>
+   </employment_information>
+</Employee>

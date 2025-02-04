@@ -1,0 +1,26 @@
+<CompoundEmployee>
+   <Person>
+      <Manager_ID>1000</Manager_ID>
+      <Manager_Name>Manager A</Manager_Name>
+      <Employee_ID>8000</Employee_ID>
+      <Employee_Name>Emp A</Employee_Name>
+   </Person>
+   <Person>
+      <Manager_ID>1000</Manager_ID>
+      <Manager_Name>Manager A</Manager_Name>
+      <Employee_ID>8005</Employee_ID>
+      <Employee_Name>Emp B</Employee_Name>
+   </Person>
+   <Person>
+      <Manager_ID>2000</Manager_ID>
+      <Manager_Name>Manager B</Manager_Name>
+      <Employee_ID>9000</Employee_ID>
+      <Employee_Name>Emp C</Employee_Name>
+   </Person>
+   <Person>
+      <Manager_ID>2000</Manager_ID>
+      <Manager_Name>Manager B</Manager_Name>
+      <Employee_ID>9002</Employee_ID>
+      <Employee_Name>Emp D</Employee_Name>
+   </Person>
+</CompoundEmployee>

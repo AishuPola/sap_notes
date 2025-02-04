@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Employees>
+   <Employee>
+      <PERNR>1000</PERNR>
+      <Name>Mr. A</Name>
+      <Position>
+                  <PositionID>300</PositionID>
+                  <PositionName>Position A</PositionName>
+      </Position>
+      <Position>
+                  <PositionID>400</PositionID>
+                  <PositionName>Position B</PositionName>
+      </Position>
+      <Position>
+                  <PositionID>500</PositionID>
+                  <PositionName>Position C</PositionName>
+      </Position>
+      <Position>
+                  <PositionID>600</PositionID>
+                  <PositionName>Position D</PositionName>
+      </Position>
+      <Position>
+                  <PositionID>700</PositionID>
+                  <PositionName>Position G</PositionName>
+      </Position>
+   </Employee>
+</Employees>
