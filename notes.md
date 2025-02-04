@@ -1030,14 +1030,16 @@ where we can configure api proxys for integruition suite .
 why api proxys:
 
 open connectors:it as pre built connectors, for third party applications.
+maily we will use it with salesforce.
 
 event mesh:
 two level messaging:
+
 synchrinous:
 source will req or handover the info to taget and wait for response.
 asychronous: it will not wait for response.
 
-integration advsior:
+integration advsior:b2b scenarios.
 
 edge intergation cell: some customers, they will not keep some info in cloud, so they do keep in on prem .
 so to connect with on prem with clpud we will edge integration.
@@ -1050,7 +1052,8 @@ they have set of pre flowed iflow's.
 sap graph:
 ideally need to connect to sf api, grow api,
 it is complex,
-so we will go through grpah, only one api.
+so we will go through graph
+, only one api.
 
 odata provisioning:
 replaciing net weaver gateway.
@@ -1058,12 +1061,34 @@ replaciing net weaver gateway.
 integration assessment:
 inbuilt feature.
 design checks.
+develop ur strategy.
 
 migration assessment: migrate from pipo to this
 
-# benefits
+move from legacy to
+
+# benefits of sap btp integration suite.
 
 ![alt text](image-46.png)
+
+flexibility:
+on ecc,
+sap s4 hana on prem
+cloud entities, sap, non sap , saas,
+all these will talk to sap btp integration suite.
+
+lowcode/ no-code:
+
+integrtaion. suite is more process related.
+
+reduced tco(total cost of ownership): tco, it depends,
+
+security and compliance: it supports dual key,
+
+basic, oauth, in api.
+
+event-driven architecture:
+with event mesh, data processing is done.
 
 after opening integration suite:
 
@@ -1078,3 +1103,47 @@ pre packaged.
 apis
 
 what is coupa?
+
+day:15
+
+in monitor:
+
+security material:
+
+# license models:
+
+![alt text](image-47.png)
+
+# use cases :
+
+![alt text](image-48.png)
+
+ibp-->saas application
+
+each customer will have there own interface name.
+
+what are artifacts:
+we can create value mapping( source one name, is mapped to other name in target.),
+apis:
+imported archives:
+message mapping:
+functional libraries:
+integration flow:
+integration adapter:
+script collection:
+data type:
+message type:
+
+in design:
+graph:
+b2b scenaoris
+custom type systems:
+for soap req kind of work.
+standard integration for prepackaged.
+customer---> desgin
+test--> apis to test, it gives framkeworkf for test
+configure---> provider specofcic,
+
+monitor--> monitor if's, pgp keys, maintain access policies.
+
+able to connect---> using test connectivity.
