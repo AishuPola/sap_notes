@@ -1104,7 +1104,7 @@ apis
 
 what is coupa?
 
-day:15
+# day:15
 
 in monitor:
 
@@ -1147,3 +1147,55 @@ configure---> provider specofcic,
 monitor--> monitor if's, pgp keys, maintain access policies.
 
 able to connect---> using test connectivity.
+
+# day:16
+
+ctms service process for import and export intergration flows.
+
+# cloud integration features:
+
+![alt text](image-49.png)
+
+features:
+
+artifacts: we have a;; integration flow, mapping etc.
+integration flow:
+mapping: for interface we have source and target, it can be sap or non sap.
+we are handling message or data for particular run.
+we can convertS according to what target wants.  
+we can concat data, according to what target wants.
+
+value mapping: we will do certain mapping which should be configurable.
+what values can be fit in.
+eg:replacing values within systems(source and target)
+its like key value.
+
+we can make quick adaptions.
+
+integration adapter:pre built I.fLOWS
+api artifacts:
+we can directly use this artifact when custom
+
+script collection:
+we keep all groovy scripts and can be reused.
+
+data type: in message transformation,
+it can be reused on directly used in particular flow.
+
+imported archives:
+
+message type:
+we can create an artifact and we can reuse it.
+
+# additional features in sap cloud integration:
+
+![alt text](image-50.png)
+
+integration flow is a combination of sender adaptor and reciver adaptor(target)
+![alt text](image-52.png)
+
+these all are pallot options.( messaga maping, subprocess etc)
+
+# data transformation & mapping features:
+
+![alt text](image-51.png)
