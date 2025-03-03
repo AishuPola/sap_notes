@@ -1199,3 +1199,290 @@ these all are pallot options.( messaga maping, subprocess etc)
 # data transformation & mapping features:
 
 ![alt text](image-51.png)
+udf?
+
+# day 18:
+
+# sftp sender and receiver adapter:
+
+day:19
+
+# request reply pallet option
+
+when we want to req something and do according to the reply.
+
+day:20
+
+dual connection
+
+day:21:
+
+# encryption and decryption:
+
+# pgp encryption:
+
+pgpkeygen.com
+kleopatra.
+for generting puyblic and private key.
+
+signing : enchance the security.
+when we want to send a file from source to target.
+its like stamp, when a target wants to send file to source.
+
+![alt text](image-53.png)
+
+![alt text](image-54.png)
+
+day 23:
+
+#
+
+# groovy script
+
+u can extract, covert the data using groovy script.
+
+we can directly connect to sftp, we can do encryption, etc.
+
+we have pallet options, to do work, but in case if there is no pallet opt is possible, we can use groovy script.
+
+add, modify the value can be done usig groovy script.
+
+xml modifier:(pallet function)
+where we can remove xml declaration.
+
+router: its like if else in node js.
+
+message mapping:
+it will map s to t,
+
+header and line item
+
+# exception sub process:
+
+if something happened, put it to exception , and call that , what we write in lip.
+
+# LIP:
+
+1. REUSINg
+2. modularity-->
+3. scalable:
+
+4. security
+
+this(LIP) will help in terms of modularity.
+
+process direct adpter:
+
+it will can to connect, other iflow.
+direct communication between two or more integration flows (iFlows)
+
+# Adapters:
+
+![alt text](image-55.png)
+![alt text](image-56.png)
+
+# pallet tasks:
+
+![alt text](image-57.png)
+
+splunk and servicenow
+![alt text](image-58.png)
+
+date: 18/2/2025
+
+# esclation end event:
+
+![alt text](image-59.png)
+
+# soap:
+
+source:sap or non sap
+
+when target/source is non sap, then soap comes into picture.
+
+who will send soap:
+it is being used, not an 1st option,
+![alt text](image-60.png)
+req and res--->synchronous
+hand it over-->asynchronous.
+
+odatav2 and rest api is more desired to use.
+![alt text](image-61.png)
+
+when we want o comm with saop, we use apis.
+
+in some scenarois we have to use saop only.
+jounral entry posting:
+![alt text](image-62.png)
+
+inbound: crud operations
+outbound:sending information.
+
+day:19-2-2025
+
+# soap api:
+
+public cloud:saas,(s4 hana cloud) if any external party want to interact then it is only through apis.
+
+what kind of apis?
+odata, v2 v4, rest api, soap.
+
+for rest api:
+inbound direct, we want to extract
+![alt text](image-63.png)
+
+what is sand box enviromnet?
+it allows only get operation.
+
+for suppose, we wnt supplier invoice, we dont have in rest api, so we will check in other apis, like odata v2, odatav4,
+
+from send to receiver the data which we need to post may not be same, we use message mapping and send to receiever.
+
+api here is:
+
+![alt text](image-64.png)
+
+x.509 is the certificate.
+
+https://api.sap.com/api/API_SUPPLIERINVOICE_PROCESS_SRV/overview
+
+in soap: rm: is used for asynchronous messaginh
+1.x is used f or synchronous messaging.
+
+# odata receiver:
+
+![alt text](image-65.png)
+
+![alt text](image-66.png)
+
+# GET DATA THROUGH BATCH PROCESSING:
+
+https://sapzero2hero.com/2024/12/26/sap-cpi-operation-batch-in-odata-v2-receiver-adapter-with-cloud-platform-integration/
+
+# DATA STORES:
+
+PERSISTENT MESSAGES AND DATA STORE OPERATIONS:
+
+why persistent?
+for supp, we go business req, u want to run job every 30min through sap and generate new customer data, make sure there is no duplicate data,
+
+sap has created field which has the value 2025-2-27T13500
+
+job should have filter logic to say between start and end data and time.
+
+filter is created on 27feb 2025--->duplicates
+
+filter is created on data and time range--- 12 am gmt job shuld pick the customers created between 24th feb 2025 11.31 AM GMt to 12am gmt.
+
+how should i not get theduplicate data?
+we can use time range
+
+sometimes job may fail, so next job ideally, shpuld take the previous one also.
+
+how dow we know this?
+where do we store this?
+
+we use the datastore.
+![alt text](image-67.png)
+
+i just placed the data--->no need to response--->asynchronous
+
+# data store, varaiables, and jms queues:
+
+![alt text](image-68.png)
+
+s4 hana public cloud-->source
+get coupa oauth bearer token--> then get coupa suplier number-->get coupa supplier remittance--->post
+supplier to Coupa--->iflow execution completed.
+get coupa oauth bearer token--> no need of new token everytime
+
+cpi, means integration suite, cloud integration both are same.
+
+varaiables: we store cerrtain values and use it later.
+
+![alt text](image-69.png)
+
+data store:
+it is used to store messages on the database, and what type of data base is abstracted.
+
+jms queue:
+20 queues are allocated to trail.
+
+decoupling:
+s4 hana public, ---> retaining the msgs is imp, so he need to dump in jms.
+cloud and coupa.
+benefit: message, if it is failed,still it will be in jms queue.no need to go till s4 hana cloud.
+
+# error handling:
+
+error monitoring-->we get a chance to get in emails or IFlow monitoring
+error notification---> in exception handling we have used mail adpter, to notify it.
+or logging to service now, or
+
+error handling---> what is the error, what is the route cause, how should i hold the msg for, im i moving to jms.
+
+error reprocess--->a system designed to automatically retry processing data that previously failed due to an error
+
+retry is done , only if queue is there.
+
+![alt text](image-70.png)
+
+![alt text](image-73.png)
+
+![alt text](image-74.png)
+
+how do we keep the messages persistent .
+
+chuking queue: break into small chunks.  
+error queue:  
+processing queue:when somethings is processing.  
+![alt text](image-75.png)
+
+![alt text](image-76.png)
+
+![alt text](image-77.png)
+
+IF1,IF2
+
+these 2 are not coupled.
+flow1 will dump the data, and doesnot know who is gng to use it.
+flow 2 doesnot know, whose data they are using.
+this is decoupling.
+
+data store is the mediator.
+
+![alt text](image-78.png)
+
+its like, you're storing and other guy is using it.
+
+![alt text](image-79.png)
+
+![alt text](image-80.png)
+
+retention thershold for alerting:
+
+why do we need to go for persistence?
+when do we need it?
+data store: what it does?
+it has send and receiver adapter.
+it is used for asyn and
+
+jms:
+activate it , at the time of capabilities.
+it as 20 queues, and also for error handling, gurantee messages and decoupling.
+s4 --> publisher if immediately post the message to jms, from there, we do business logic in ( subcriber IF),
+if message is failed, error queue.
+process queue.
+
+jms as sender and receiver, it is auto poling,
+it as retry machanism
+
+write variable:
+this is for global or particular iflow.
+
+best way is for hold token in encrypter format.
+
+all messages will store in datastorage.
+we can post iy back.
+
+we cant keep scheduler in jms.

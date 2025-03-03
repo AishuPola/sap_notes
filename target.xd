@@ -1,24 +1,32 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Employees">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="Employee">
-          <xs:complexType>
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Products">
+        <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:short" name="PERNR"/>
-              <xs:element type="xs:string" name="Name"/>
-              <xs:element name="Position" maxOccurs="unbounded" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element type="xs:short" name="PositionID"/>
-                    <xs:element type="xs:string" name="PositionName"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
+                <xs:element name="Product" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Category" type="xs:string"/>
+                            <xs:element name="WeightUnit" type="xs:string"/>
+                            <xs:element name="ProductId" type="xs:string"/>
+                            <xs:element name="DimensionUnit" type="xs:string"/>
+                            <xs:element name="DimensionHeight" type="xs:decimal"/>
+                            <xs:element name="Weight" type="xs:decimal"/>
+                            <xs:element name="Name" type="xs:string"/>
+                            <xs:element name="ShortDescription" type="xs:string"/>
+                            <xs:element name="CurrencyCode" type="xs:string"/>
+                            <xs:element name="DimensionWidth" type="xs:decimal"/>
+                            <xs:element name="SupplierId" type="xs:string"/>
+                            <xs:element name="LongDescription" type="xs:string"/>
+                            <xs:element name="Price" type="xs:decimal"/>
+                            <xs:element name="CategoryName" type="xs:string"/>
+                            <xs:element name="PictureUrl" type="xs:string"/>
+                            <xs:element name="DimensionDepth" type="xs:decimal"/>
+                            <xs:element name="QuantityUnit" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

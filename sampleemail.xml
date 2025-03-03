@@ -1,0 +1,8 @@
+<Emails>
+    <Email>
+        <Name>John Doe</Name>
+        <Email>john.doe@example.com</Email>
+        <Subject>Welcome</Subject>
+        <Message>Hello John! Welcome to our platform.</Message>
+    </Email>
+</Emails>
