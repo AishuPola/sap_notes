@@ -1486,3 +1486,405 @@ all messages will store in datastorage.
 we can post iy back.
 
 we cant keep scheduler in jms.
+
+# data store:
+
+Data store is not good for heavy payloads, it is only good for small payloads.
+
+-- Write :
+
+Visibility is the usage scope .. global means all integration flows can use them
+
+write-->store the messages
+get--->selecting the particular entry.
+select--> we get all the entries.there is no entry id.
+delete:
+if it is global, directly it will delete.
+
+https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-write-variables
+
+use it global for a proj with all the interfaces.
+
+write varaibles: similar varaible we have in the message header.
+scope: within the IF.
+when we want to send between the diff IF'S then we can use write varaibles.
+
+write varaible:
+get csv from sftp and trgger mock error, and navigate the error to eception subproceess(lip) and we are writing in the write varaible.
+
+### **📌 What is the Use of Entry ID in Data Store?**
+
+The **Entry ID** is a **unique identifier** for each record stored in the **Data Store** of SAP CPI. It helps in managing, retrieving, and updating stored data efficiently.
+
+---
+
+### **📌 Why is Entry ID Important?**
+
+1. **Uniquely Identifies Each Record**
+
+   - Every message stored in the Data Store needs a unique **Entry ID** to avoid overwriting other records.
+   - Example: Storing two different orders with the same **Entry ID** will **overwrite** the old order.
+
+2. **Retrieval of Specific Data**
+
+   - When using **Data Store Get**, you need to provide the **Entry ID** to fetch a specific record.
+   - Example: If you stored an order with `Entry ID = 20240304153020`, you must use the same ID to retrieve it.
+
+3. **Updating Existing Data**
+
+   - If you write data with an existing **Entry ID**, the data gets **overwritten** instead of creating a new entry.
+   - Example:
+     - Initial Entry: `Entry ID = Order1001`
+     - If you write new data with **the same Entry ID**, it **updates** the existing record instead of creating a new one.
+
+4. **Maintains Data Integrity**
+   - Ensures that no duplicate or conflicting records exist in the **Data Store**.
+
+---
+
+### **📌 How is Entry ID Assigned?**
+
+You can set the **Entry ID** in different ways:
+
+1. **Static ID** (Manually set)
+
+   - Example: `"Order1001"` (Hardcoded, useful if you want a fixed key)
+
+2. **Dynamic ID** (Auto-generated using Expressions)
+   - Example: `${date:now:yyyyMMddHHmmss}` → Generates an ID like `20240304123045`
+   - This ensures **each entry is unique** and avoids overwriting existing data.
+
+---
+
+### **📌 Example Scenarios**
+
+| Scenario                       | Entry ID Example             | Result                                        |
+| ------------------------------ | ---------------------------- | --------------------------------------------- |
+| **Storing a new order**        | `Order2001`                  | Data is stored with ID `"Order2001"`          |
+| **Fetching a specific order**  | `Order2001`                  | Retrieves only `"Order2001"` from Data Store  |
+| **Overwriting existing order** | `Order2001`                  | Updates the existing `"Order2001"` record     |
+| **Using dynamic Entry ID**     | `${date:now:yyyyMMddHHmmss}` | Each stored record gets a unique timestamp ID |
+
+---
+
+### **📌 Summary**
+
+- The **Entry ID** uniquely identifies each stored record.
+- It is used for **retrieving**, **updating**, or **overwriting** data in the **Data Store**.
+- Using **dynamic Entry IDs** prevents data loss due to overwriting.
+
+Would you like a **working example** of **Data Store Write + Get** using Entry IDs? 😊
+
+entry id:--->
+within the same integration flow,
+diff entry id has diff
+
+5th march:
+
+in inspect memory usage:
+inspect resource consumption
+
+# JMS:
+
+s4 hana(soap sender adp-)-->posting data----> http adapter coupa.
+we have retry mechanism.
+
+1. data store
+2. jms.
+   data store doesnot have, the capability of auto clearing the data.
+
+jms is the better guy:
+in queues we have limits.
+
+![alt text](image-81.png)
+
+![alt text](image-82.png)
+
+the momemt i got data form s4 . dump it into jms.
+
+subcriber will have the if,
+
+we are publishing data to solace/jms.
+
+what if solace is dowm?
+
+for this kind of sitaution :
+sol: we have it in jms.
+
+polling--> it is done by its own.
+
+externalise parameters shou
+
+no of concurrent process--> is it one or 10
+we can enable parallel processing.( an instance can run one to many. )
+in parallel:
+1 by 1--->sequential()
+2 at a time 2 .
+3 of will run at a time.
+
+exponential backoff:
+it has a logical thinking of its own.
+
+maximum retry: after 10 min, it wont try.
+
+dead letter queue:?
+
+task--->
+
+source sftp, jms publisher recivr and get it, posting to odata,
+
+receiver http.
+in that keep
+csv into jms, after that use jms,
+
+# Routing multicast and splitter:
+
+![alt text](image-83.png)
+
+![alt text](image-84.png)
+
+![alt text](image-85.png)
+
+![alt text](image-86.png)
+
+# splunk adapter
+
+this is for monitoring.
+
+why to create destination?
+
+solace trail acc
+
+# genral splitter:
+
+is same like foreach.
+expression type: xpath and line break.
+grouping: 2 messages, or 1-1 messages.
+for each item, 1-1 product to get it
+
+general splitter:--->split ur huge chunk into multiple chunks not to get the timeout issues..
+
+# hands on task:
+
+Enhance the existing HTTPS Sender Adapter to ODATA GET iFlow to multiple ProductIdentifier referring to the XML Payload Provided.
+
+Enhance the existing batch OData Posting by taking input payload consists of 15 Products, split into 3 chunks and do batch posting of 5 Products in one API Post Operation
+
+Once the Sandbox APIs are up hoping on 13th Mar, we need to get the customer specific data generated in CSV using General Splitter and place it on SFTP.
+
+poll on one worker only in sftp sender, --->parallel processing doesnt happen.
+![alt text](image-87.png)
+
+sap outbound: gener
+
+sap inbound: posting through odata, break bulk into smaller chunks.
+
+![alt text](image-88.png)
+
+![alt text](image-89.png)
+
+![alt text](image-90.png)
+
+![alt text](image-91.png)
+
+![alt text](image-92.png)
+
+![alt text](image-93.png)
+
+![alt text](image-94.png)
+
+![alt text](image-95.png)
+
+# splunk and service now:
+
+![alt text](image-96.png)
+
+# datadoc
+
+as2 ,aem,
+amqp sender,jms,datastore all these adapters has retry,
+these retry mechanism wil be for sender adapter.
+retry means--->
+kafka,
+azure service bus.
+googlepubsub.
+adapters which are persistent and there is guranteed delivery.
+
+connection---> it can be recoverable
+business logic:non recoverable
+
+# multicast gather demo:
+
+one shot all
+
+# sequnetial multicast:
+
+![alt text](image-97.png)
+one after the other
+
+in s4hana public cloud, we have e tag.
+
+![alt text](image-98.png)
+
+this is the practical way.
+
+# ETag (Entity Tag)
+
+is a mechanism used in SAP S/4HANA OData services to handle optimistic concurrency control. It helps prevent data conflicts when multiple users or systems try to update the same resource simultaneously.
+
+https://community.sap.com/t5/technology-blogs-by-sap/sap-cloud-integration-odata-v2-conditional-update/ba-p/13374286
+
+![alt text](image-99.png)
+
+# iterative splitter:
+
+![alt text](image-100.png)
+![alt text](image-101.png)
+
+# message retry--> no layer architecture:
+
+if in if, error occurs it goes to exception block and also retry messages, before gng to target.
+
+![alt text](image-102.png)
+![alt text](image-103.png)
+![alt text](image-104.png)
+eda_global_retry_process_using_jms
+global message
+![alt text](image-105.png)
+![alt text](image-106.png)
+![alt text](image-107.png)
+![alt text](image-108.png)
+![alt text](image-109.png)
+![alt text](image-110.png)
+![alt text](image-111.png)
+![alt text](image-112.png)
+pagination:
+
+![alt text](image-105.png)
+
+# task:
+
+![alt text](image-113.png)
+
+# solace or advance event mesh:
+
+cluster:grup of nodes.
+cluster manager:create service.
+service details, we have broken url and password,
+
+in queues:create queue.
+in try me: we get host, vpn,
+
+dynamic routing is enabled.
+
+# basic event mesh:
+
+we will have the payload notification,
+in business accelareaor hub we have event object, we can find there.
+
+# advance event mesh:
+
+# open connectors:
+
+# api management:
+
+# api proxys:
+
+a layer which is masking behind particular design.
+
+1. it is like security related.
+2. for disaster recovery also it is imp.
+
+if prod is down, how quickly bring up dr,
+
+# api proxys are used to mask our end point url.
+
+if we give orginal https url, then he will get to know the orginal ip address, so we use proxys.
+![alt text](image-114.png)
+
+![alt text](image-115.png)
+
+apis also have pre packaged stuff
+
+![alt text](image-116.png)
+
+![alt text](image-117.png)
+
+apache camel runtime is there for integration suite.
+
+![alt text](image-118.png)
+![alt text](image-119.png)
+
+![alt text](image-120.png)
+
+connect to business
+
+# api provider:
+
+it will handle target endpoint connection.
+
+![alt text](image-121.png)
+![alt text](image-122.png)
+
+# What Can You Do with API Management?
+
+Secure APIs → Protect APIs from hackers by using authentication (like login ID & password).
+
+Monitor APIs → Track usage, check errors, and improve performance.
+
+Control Access → Decide who can use which API and limit how often they can use it.
+
+Expose APIs → Share APIs with internal teams, partners, or customers.
+
+Improve Performance → Cache frequently used data so APIs respond faster.
+
+Monetize APIs → Charge users for API usage (if required).
+
+# How API Management Works?
+
+API Management acts as a middleman between API providers (who create APIs) and API consumers (who use APIs).
+
+Steps in API Management:
+Create an API → Design the API in SAP API Management.
+
+Secure the API → Add authentication (OAuth, API Key, etc.).
+
+Apply Policies → Set rules like rate limits (e.g., 100 requests per minute).
+
+Publish the API → Make it available for use.
+
+Monitor API Usage → Track API calls, errors, and response times
+
+# What is a Proxy API?
+
+A Proxy API is like a security guard for your actual API. It hides the real API and protects it from direct access.
+
+Why Create a Proxy API?
+✅ Security → Prevents direct access to backend services.
+✅ Rate Limiting → Controls how many times an API can be called per minute.
+✅ Logging & Monitoring → Tracks all API requests and responses.
+✅ Flexibility → Modify API behavior without changing backend code.
+
+developer hub:  
+can have multiple applications
+
+application can have one product, or more
+in ADMIN center:
+
+we have 3 options to create api proxy:
+
+url, api provider
+
+we created a api proxy,
+policies:
+we can have basic auth, oauth or api key
+
+we can create a api key, with help of developer hub.
+
+we do in engage
+
+![alt text](image-123.png)
+
+associating product into the application in the developer hub.
+
+![alt text](image-124.png)
