@@ -1888,3 +1888,402 @@ we do in engage
 associating product into the application in the developer hub.
 
 ![alt text](image-124.png)
+
+Think of It Like a Delivery System
+You are ordering a product online. Here’s how it flows:
+
+ProxyEndpoint Pre-flow = Security gate at your apartment entrance.
+
+Checks if the delivery person is allowed in.
+
+Verifies your ID or key.
+
+Adds a gate-pass.
+
+TargetEndpoint Pre-flow = Warehouse staff preparing the package.
+
+They label it, box it up, and attach the correct shipping address.
+
+TargetEndpoint Post-flow = The package arrives at the gate.
+
+Before handing it over, the gate might check the contents.
+
+ProxyEndpoint Post-flow = Final delivery to your doorstep.
+
+Adds a friendly message like “Thanks for ordering!” or applies a discount coupon.
+
+Records delivery success.
+
+🔁 Technical Breakdown:
+Area When It Runs What It Does Example
+ProxyEndpoint Pre-flow When request first enters the proxy Auth checks, rate limits, headers Check API Key
+TargetEndpoint Pre-flow Just before sending to backend Prepare for backend (auth, URL, format) Add Basic Auth or transform request
+TargetEndpoint Post-flow Just after backend responds Change/clean response Mask data, log
+ProxyEndpoint Post-flow Just before sending back to user Final headers/logs Add CORS headers, log
+
+ProxyEndpoint Post-flow:
+
+Happens at the end, after backend is done.
+
+Meant for response cleanup, final logging, headers like:
+
+http
+Copy
+Edit
+Access-Control-Allow-Origin: \*
+TargetEndpoint Pre-flow:
+
+Happens before backend is called.
+
+You use it to prepare the request for your real API.
+
+Example: Add an OAuth token, or reformat the payload
+
+# proxy--oauth, target--oauth:
+
+client-id, client-secret, which are given in proxy endpoint,
+those are gng forward to target endpoint, and these are creating
+the trouble, target endpoint client id client secret are running in the run time,
+thats why we are using the remove headers while giving proxy--->oauth and target---->oauth
+
+Dynamic_routing_layer-1_1_0_0
+
+# dynamic routing in api:
+
+![alt text](image-125.png)
+
+scenario:
+
+![alt text](image-126.png)
+
+![alt text](image-127.png)
+
+# adding resources to an api:
+
+scenaorio:suppose im taking, a api sales order from api.sap.com, and that i m creating a api proxy,using apikey from accerlerator hub, . we we wll all sales order data, after dng this, then why to crete a resource, why to remove resources? what is the use of this
+
+Let’s break it down step by step in a simple way:
+
+---
+
+### ✅ Scenario Summary:
+
+- You're using a **Sales Order API** from `api.sap.com` (e.g., via API Business Hub).
+- You created an **API Proxy** in SAP API Management.
+- You're using **API Key** authentication to call the backend (from API Hub).
+- You get **all sales order data** when calling the API.
+
+So now you're asking:
+
+> 💬 _Why should I create or remove **resources** in the API proxy?_
+
+---
+
+### 🎯 What is a **Resource** in an API Proxy?
+
+In SAP API Management (Integration Suite), a **resource** defines a **specific path or endpoint** of your API that can be called.  
+For example:
+
+- `/salesorders`
+- `/salesorders/{id}`
+- `/salesorders?$top=10&$orderby=CreatedDate`
+
+Each resource can have its **own policies**, like:
+
+- Authentication
+- Rate limiting
+- Response transformation
+- Caching
+
+---
+
+### 🧠 So, **Why Create Resources**?
+
+Even if the backend API (from API Hub) exposes many endpoints —  
+you may **not want to expose everything** to the consumer of your proxy.
+
+Here’s **why and when** you'd create resources:
+
+| Reason                      | Explanation                                                                                              |
+| --------------------------- | -------------------------------------------------------------------------------------------------------- |
+| 🎯 Focused Access           | Only expose specific endpoints, like `/salesorders`, not all endpoints.                                  |
+| 🔐 Apply Different Policies | You may want different security policies for different resources (e.g., `/salesorders` vs `/customers`). |
+| 📊 Analytics                | You can monitor resource-specific usage: which endpoint is used more?                                    |
+| ⚠️ Limit Exposure           | Avoid exposing sensitive backend paths you don’t want external users to see.                             |
+| 🛠 Modify Requests/Responses | Customize request/response for each resource (e.g., mask data, translate fields).                        |
+
+---
+
+### ❌ Why Remove Resources?
+
+Let’s say:
+
+- When you imported the API from API Hub, it brought in **all resources**.
+- But you're only interested in `/salesorders` — not `/metadata`, `/products`, `/suppliers`, etc.
+
+👉 Then, you can **delete/remove unused resources** from the proxy to:
+
+- Keep your proxy clean and maintainable.
+- Improve performance (less overhead).
+- Avoid unnecessary exposure of backend functionalities.
+
+---
+
+### 📌 Real-life Analogy
+
+Think of the full API from API Hub like a **menu in a restaurant** with 50 dishes.  
+You only want to **offer 3 dishes** to your customers — so you create a **short menu** (resource list) in your proxy.
+
+---
+
+### ✅ Conclusion
+
+- **Create resources** in your API proxy to expose **only the needed endpoints**, add custom logic, and apply security/rate limiting per endpoint.
+- **Remove unused resources** to keep the API safe, focused, and clean.
+
+---
+
+# resources:
+
+we will place all the apis in developer hub.
+and whoever want it, they can use it, by taking the client id, seceret and token url.
+
+# sap graph:
+
+![alt text](image-128.png)
+
+![alt text](image-129.png)
+
+![alt text](image-130.png)
+
+![alt text](image-131.png)
+
+![alt text](image-132.png)
+
+# 5-5-2025
+
+# TPM:
+
+![alt text](image-133.png)
+
+![alt text](image-134.png)
+
+![alt text](image-136.png)
+
+tpm is also know as b2b scenarios.
+components involved are:
+
+1. integration advsior
+2. trading partner management(TPM)
+3. sap cloud integration
+4. b2b monitoring
+
+# integration advsior
+
+for example:
+source is amazon or spencer
+
+target is s4 hana public.  
+this source will have one message implementation guideline
+
+this target will have one message implementation guideline
+
+we will have one mag to map this source and target.
+
+generally sap message implementation is on odata or soap.
+source is edi, edi factor x12.
+
+when mag is ccreated, the integration advisor gives that acress diff companies, they are using this mapping---.like proposal.
+
+for eg, some juice company are using the sap
+
+# trading partner management(TPM)
+
+repository to maintain .
+for example:
+
+like what is template, agreement, ast url,
+what is my certificate with amazon,
+
+UI to maintain all ur partners, all pertner specific agreements, sender, receiver configurations , profile certificates,encryption, decryption.--->configure for each specific partner,,
+
+# Trading partner Management
+
+Trading Partner Management (TPM) in SAP refers to the structured way of managing relationships, data exchange, and integration between a company and its external business partners (e.g., suppliers, customers, logistics providers). TPM is particularly critical in B2B integration, EDI (Electronic Data Interchange), and supply chain collaboration.
+
+![![alt text](image-138.png)](image-137.png)
+
+trading partner will use as2 adapter as it is edi data, to send and receive.
+![alt text](image-145.png)
+
+trading partner agreement templates : bascially what kind of interchange, mappping guideliness etc
+
+agreement-->btwn trading partner.
+
+![alt text](image-139.png)
+
+Their purchase order is our sales order. (Example of orange juice) buying oranges from store i.e we r raising a purchase order to the shop owner i.e a sales order for him.
+
+tpm is for one point to multi point
+
+![alt text](image-140.png)
+
+b2b-->via as2  
+value added network-->sftp
+sap s4hana on prem--->sap idoc  
+for example:
+to make orange juice , we require->oranges, water, citric acid, etc
+so these are available from diff suppliers, these diff suppliers use diff adapter like as2, uni/edifact,sap idoc.
+
+![alt text](image-141.png)
+
+(creating a profile for the company)
+
+![alt text](image-142.png)
+
+![alt text](image-143.png)
+
+mag- mapping guide lines Using these 2 MIG's we create the MAG's.
+We will be having 1 Trading partner can have 1 or more Agrement templates. like for 850 - 1 template , 812 -1 Template
+![alt text](image-144.png)
+\
+
+# understanding TPM:
+
+Got it! I will explain Trading Partner Management (TPM) in SAP CPI in a **clear, simple, and well-structured way**, covering:
+
+1. **What is TPM?**
+2. **Why do we need TPM?**
+3. **How does TPM work?**
+4. **Core Components: MIGs, MAGs, Agreements**
+5. **Step-by-Step Example**
+
+---
+
+## 🌐 **What is Trading Partner Management (TPM) in SAP CPI?**
+
+- **Trading Partner Management (TPM)** is a feature in **SAP Cloud Platform Integration (CPI)** that helps you manage and automate the exchange of business messages (like invoices, orders, shipping details) with your partners (suppliers, customers, etc.).
+
+---
+
+## 🚀 **Why do we need TPM?**
+
+Imagine you are a company that needs to send and receive business documents (like invoices) with many other companies. Each of these companies (your **trading partners**) may use different formats, rules, and protocols for these documents.
+
+Without TPM:
+
+- You would manually ensure that the message format is correct for each partner.
+- You could make mistakes because different partners have different requirements.
+- It would be difficult to track and manage these exchanges.
+
+With TPM:
+
+- You can automate the process.
+- You can ensure that all messages are correctly formatted.
+- You can easily manage and track all your partner connections.
+
+---
+
+## ⚙️ **How does TPM work in SAP CPI?**
+
+### TPM works in three main steps:
+
+1. **Define Message Templates (MIGs - Message Implementation Guidelines)**
+
+   - You create a standard structure for the messages you will exchange with your partners.
+   - Example: An invoice should include invoice number, date, total amount, and customer name.
+
+2. **Map Message Formats (MAGs - Mapping Guidelines)**
+
+   - You create rules for transforming messages from your format to your partner’s format (and vice versa).
+   - Example: If your partner calls "Total Amount" as "Invoice Value", the MAG will transform your "Total Amount" field to "Invoice Value" for them.
+
+3. **Set Up Agreements (Partner Agreements)**
+
+   - You define the communication rules between you and each trading partner.
+   - This includes which message types will be used, the protocol for sending messages (like AS2, SFTP), and security settings.
+
+---
+
+## 📌 **Core Components of TPM**
+
+### 1. **MIGs (Message Implementation Guidelines)**
+
+- Purpose: Defines the structure of the messages (like a blueprint).
+- Example: An order message must have:
+
+  - Order Number
+  - Order Date
+  - Product Details
+  - Quantity
+  - Price
+
+### 2. **MAGs (Mapping Guidelines)**
+
+- Purpose: Defines how to transform messages between different formats.
+- Example: Your "Order Date" field might be transformed to "Date of Order" for a specific partner.
+
+### 3. **Agreements (Trading Partner Agreements)**
+
+- Purpose: Defines the rules for exchanging messages with each trading partner.
+- Includes:
+
+  - Partner Details (Name, ID)
+  - Message Types (Invoice, Order, Shipping Notice)
+  - Protocols (AS2, SFTP, HTTP)
+  - Security Settings (Encryption, Digital Signature)
+
+---
+
+## 📝 **Step-by-Step Example of TPM in Action**
+
+### 💡 Scenario: You are a company that wants to send invoices to your customer (Partner A).
+
+### Step 1: Create a MIG
+
+- Define your invoice structure:
+
+  - Invoice Number
+  - Date
+  - Customer Name
+  - Amount
+
+### Step 2: Create a MAG
+
+- Map your invoice format to your partner's format:
+
+  - Your "Customer Name" → Partner A's "Client Name"
+  - Your "Amount" → Partner A's "Invoice Total"
+
+### Step 3: Set Up an Agreement
+
+- Define how you will exchange invoices with Partner A:
+
+  - Message Type: Invoice
+  - Protocol: AS2 (secure internet transfer)
+  - Security: Digital Signature for authentication
+
+### Step 4: Automate and Monitor
+
+- When you create an invoice, TPM automatically:
+
+  - Formats it using the MIG.
+  - Transforms it using the MAG.
+  - Sends it securely based on the agreement.
+
+---
+
+## 🌟 **Why TPM is Powerful in SAP CPI**
+
+- **Consistency**: Ensures that messages always follow the correct format for each partner.
+- **Scalability**: Makes it easy to add new partners without complex setup.
+- **Security**: Supports secure protocols and encryption.
+- **Automation**: Minimizes manual work and reduces errors.
+
+---
+
+Would you like me to show you a **realistic example (with screenshots and setup steps)** of TPM in SAP CPI?
+
+Would you also like me to show how to create MIG, MAG, and Agreements in SAP CPI practically?
+
+Let me know. 🙂
